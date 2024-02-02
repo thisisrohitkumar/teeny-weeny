@@ -1,0 +1,17 @@
+{
+  "name": "teeny-weeny",
+  "version": "1.0.0",
+  "description": "A URL shortner web app backed with express JS",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Rohit Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.1"
+  }
+}
