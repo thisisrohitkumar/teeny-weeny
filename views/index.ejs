@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teeny-Weeny</title>
+  </head>
+  <body>
+    <h1>Hi from home page</h1>
+    <table>
+      <thead>
+        <tr>
+            <th>S. No.</th>
+            <th>Short Url</th>
+            <th>Redirect Url</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% urls.map((item, index) => { %>
+            <tr>
+                <td><%= index + 1 %></td>
+                <td><%= item.shortUrl %></td>
+                <td><%= item.redirectUrl %></td>
+            </tr>            
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>

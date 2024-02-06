@@ -5,6 +5,7 @@ const PORT = process.env.PORT;
 const connectToDB = require("./connect");
 const urlRouter = require('./routes/url')
 const urlModel = require('./models/url')
+const path = require('path')
 
 // Connecting to MongoDB...
 connectToDB(process.env.MONGO_URL)
@@ -15,9 +16,19 @@ connectToDB(process.env.MONGO_URL)
 app.use(express.json())
 app.use('/url', urlRouter)
 
-// app.use('/url/:shortId', urlRouter)
+app.set('view engine', 'ejs');
+app.set('views', path.resolve("./views"));
 
-app.get('/:shortId', async (req, res) => {
+
+app.get('/home', async (req, res) => {
+  const allUrls = await urlModel.find({})
+  return res.render('index', {
+    urls: allUrls
+  });
+});
+
+
+app.get('/url/:shortId', async (req, res) => {
   const shortId = req.params.shortId
     const entry = await urlModel.findOne({shortUrl: shortId})
     return res.status(200).redirect(entry.redirectUrl)
