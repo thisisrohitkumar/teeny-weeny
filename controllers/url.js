@@ -17,7 +17,10 @@ const createShortUrl = async (req, res) => {
         redirectUrl: redirectUrl
     })
 
-    return res.status(201).json({shortId: shortId})
+    return res.render('index', {
+        shortId: shortId
+    })
+    // return res.status(201).json({shortId: shortId})
 }
 
 // const redirectToUrl = async (req, res) => {

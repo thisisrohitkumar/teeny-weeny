@@ -6,24 +6,148 @@
     <title>Teeny-Weeny</title>
   </head>
   <body>
-    <h1>Hi from home page</h1>
-    <table>
-      <thead>
-        <tr>
-            <th>S. No.</th>
-            <th>Short Url</th>
-            <th>Redirect Url</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% urls.map((item, index) => { %>
-            <tr>
-                <td><%= index + 1 %></td>
-                <td><%= item.shortUrl %></td>
-                <td><%= item.redirectUrl %></td>
-            </tr>            
-        <% }); %>
-      </tbody>
-    </table>
+    <div class="page__wrapper">
+      <div class="page__heading">
+        <h1>Teeny - Weeny</h1>
+        <p>(A URL Shortener backed with Express JS)</p>
+      </div>
+      <div class="form__container">
+        <form action="/url" method="post">
+          <div class="form__control">
+            <label for="url">Paste your long URL</label>
+            <input
+              type="url"
+              placeholder="Example: https://thisisrohitkumar.github.io/portfolio/"
+              name="url"
+              required
+            />
+            
+          </div>
+          <div class="submit__btn">
+            <button>Generate Short URL</button>
+          </div>
+        </form>
+        <% if(locals.shortId) { %>
+        <div class="output__container">
+          <span class="shortUrl">
+            <label for="shortUrl">Short URL</label>
+            <input type="text" name="shortUrl" id="shortUrl" value="http://localhost:5000/url/<%= locals.shortId %>">
+          </span>
+          <span class="copy_btn">
+            <button id="copy_btn">Copy</button>
+          </span>
+        </div>
+
+        <% } %>
+      </div>
+    </div>
+
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      }
+
+      .page__wrapper{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #A79AFF;
+      }
+
+      .page__heading{
+        margin-bottom: 50px;
+        text-align: center;
+      }
+
+      .page__heading h1{
+        font-size: 60px;
+        margin-bottom: 10px;
+      }
+
+      .page__heading p{
+        font-size: 20px;
+      }
+
+      .form__container{
+        background-color: #DCD3FF;
+        max-width: 1200px;
+        width: 60vw;
+        padding: 50px;
+        border-radius: 10px;
+        border: 2px solid #000;
+      }
+
+
+      label{
+        display: block;
+        font-size: 25px;
+        margin-bottom: 10px;
+      }
+
+      input{
+        font-size: 25px;
+        padding: 10px 15px;
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        outline: none;
+      }
+
+      button{
+        width: auto;
+        padding: 10px 15px;
+        font-size: 25px;
+        border-radius: 10px;
+        border: 2px solid #000;
+        background: #A79AFF;
+        cursor: pointer;
+        margin-bottom: 20px;
+        outline: none;
+      }
+
+      button:active{
+        scale: .9;
+        transition: all .2s ease;
+      }
+
+      @media screen and (max-width: 756px) {
+
+      .page__heading h1{
+        font-size: 40px;
+      }
+
+      .page__heading p{
+        font-size: 18px;
+      }
+
+      .form__container{
+        width: 90vw;
+        padding: 20px;
+      }
+
+      button{
+        width: 100%;
+      }
+      }
+
+    </style>
+
+    <script>
+      const shortUrlValue = document.querySelector('#shortUrl').value
+
+      const copy_btn = document.querySelector('#copy_btn')
+
+      copy_btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(shortUrlValue)
+        copy_btn.innerText = 'Copied!'
+      })
+
+    </script>
   </body>
 </html>

@@ -14,6 +14,7 @@ connectToDB(process.env.MONGO_URL)
 
 // Middlewares
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 app.use('/url', urlRouter)
 
 app.set('view engine', 'ejs');
