@@ -25,7 +25,10 @@ app.set('views', path.resolve("./views"));
 app.get('/url/:shortId', async (req, res) => {
   const shortId = req.params.shortId
     const entry = await urlModel.findOne({shortUrl: shortId})
-    return res.status(200).redirect(entry.redirectUrl)
+    if(entry)
+      return res.status(200).redirect(entry.redirectUrl)
+    else
+      return res.status(400).json({ Error: 'Invalid URL' })
 })
 
 
