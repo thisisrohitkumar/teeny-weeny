@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const urlModel = require('../models/url')
 const shortid = require('shortid');
 
+const getHomePage = async (req, res) => {
+  return res.render('index');
+}
+
 const createShortUrl = async (req, res) => {
     const body = req.body
     if(!body.url){
@@ -33,5 +37,5 @@ const createShortUrl = async (req, res) => {
 
 module.exports = {
     createShortUrl,
-    // redirectToUrl
+    getHomePage
 }

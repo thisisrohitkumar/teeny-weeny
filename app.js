@@ -15,18 +15,11 @@ connectToDB(process.env.MONGO_URL)
 // Middlewares
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use('/', urlRouter)
 app.use('/url', urlRouter)
 
 app.set('view engine', 'ejs');
 app.set('views', path.resolve("./views"));
-
-
-app.get('/home', async (req, res) => {
-  const allUrls = await urlModel.find({})
-  return res.render('index', {
-    urls: allUrls
-  });
-});
 
 
 app.get('/url/:shortId', async (req, res) => {

@@ -1,10 +1,13 @@
 const express = require('express')
-const { createShortUrl, redirectToUrl } = require('../controllers/url')
+const { createShortUrl, getHomePage } = require('../controllers/url')
 const router = express.Router()
 
 
+router.get("/", getHomePage)
+
 router.post("/", createShortUrl)
 
-// router.get("/", redirectToUrl)
+
+
 
 module.exports = router
